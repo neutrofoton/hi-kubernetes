@@ -41,7 +41,7 @@ The Master Node manages the Worker Nodes. It's the Master Node jobs to distribut
 
 Every cluster has at least one worker node. In a node there are several [some services](https://kubernetes.io/docs/concepts/overview/components/). Roughly it's shown in the following pictures.
 
-<img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images/ss_kubernetes_service.png" alt="" width="75%"/>
+<img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images/ss_kubernetes_service.png" alt=""/>
 
 ## Node Components:
 Node components run on every node, maintaining running pods and providing the Kubernetes runtime environment.

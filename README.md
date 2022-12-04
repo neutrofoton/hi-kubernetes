@@ -13,7 +13,7 @@ Kubernates supports [some container runtimes](https://kubernetes.io/docs/setup/p
 3. [Containerd](https://containerd.io/) (pronounced: Container-dee)
 
 # Pod
-In Docker container is the smallest unit. Pod is the smallest unit in the Kubernetes world.
+In Docker, Container is the smallest unit. Meanwhile in Kubernetes the smallest unit is Pod.
 
 <img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images/ss_pod.png" alt="" width="75%"/>
 
@@ -25,7 +25,7 @@ In most common use case there is only a single container in a Pod. However somet
 
 <img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images/ss_node.png" alt="" width="75%"/>
 
-A Node can contain one or more Pods. The Node is a Server. 
+A Node can contain one or more Pods. In fact, the Node is a Server. 
 
 # Kubernetes Cluster
 Kubernetes Cluster contains serveral Nodes. The nodes can be located in different location. Usually the nodes in a Kubernetes Cluster close to each other in order to perform jobs more efficiently. 
@@ -34,6 +34,6 @@ Kubernetes Cluster contains serveral Nodes. The nodes can be located in differen
 
 In Kubernetes Cluster there is a **Master Node**. Other Nodes in the cluster are called **Worker Node**. 
 
-The Master Node manages the Worker Nodes. It's Master Node jobs to distribute load across other Woker Nodes. All Pods related to our applications are deployed in the Worker Nodes. The Master Node runs only System Pods which are reponsible for the Kubernetes Cluster jobs in general. In short the Master Node is the control of the Worker Nodes in Kubernetes Cluster and does not run our applications. 
+The Master Node manages the Worker Nodes. It's the Master Node jobs to distribute load across other Woker Nodes. All Pods related to our applications are deployed in the Worker Nodes. The Master Node runs only System Pods which are reponsible for the Kubernetes Cluster jobs in general. In short, the Master Node is the control of the Worker Nodes in Kubernetes Cluster and does not run our applications. 
 
 <img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images/ss_master_worker_nodes.png" alt="" width="75%"/>

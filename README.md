@@ -15,7 +15,7 @@ Kubernates supports [some container runtimes](https://kubernetes.io/docs/setup/p
 # Pod
 In Docker container is the smallest unit. Pod is the smallest unit in the Kubernetes world.
 
-<img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images/ss_pod_anatomy.png" alt="drawing" width="75%"/>
+<img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images/ss_pod_anatomy.png" alt="" width="75%"/>
 
 A pod can be contain one or more containers. There are also shared volumes and network resources (for example ip address) among containers in the same Pod. 
 
@@ -23,4 +23,10 @@ In most common use case there is only a single container in a Pod. However somet
 
 # Node and Kubernetes Cluster
 
-<img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images/ss_node_kubernetes_cluster.png" alt="drawing" width="75%"/>
+Kubernetes Cluster contains serveral Nodes. The Node is a Server. The nodes can be located in different location. Usually the nodes in a Kubernetes Cluster close to each other in order to perform jobs more efficiently. 
+
+<img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images/ss_node_kubernetes_cluster.png" alt="" width="75%"/>
+
+In Kubernetes Cluster there is a **Master Node**. Other Nodes in the cluster are called Worker Node. The Master Node manages the Worker Nodes. It's Master Node jobs to distribute load across other Woker Nodes. All Pods related to our applications are deployed in the Worker Nodes. The Master Node runs only System Pods which are reponsible for the Kubernetes Cluster jobs in general. In short the Master Node is the control of the Worker Nodes in Kubernetes Cluster and does not run our applications. 
+
+<img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images/ss_kc_master_worker_nodes.png" alt="" width="75%"/>

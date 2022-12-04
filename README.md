@@ -39,10 +39,37 @@ The Master Node manages the Worker Nodes. It's the Master Node jobs to distribut
 
 <img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images/ss_master_worker_nodes.png" alt="" width="75%"/>
 
-In a node there are several [some services](https://kubernetes.io/docs/concepts/overview/components/). Roughly it's shown in the following pictures.
+Every cluster has at least one worker node. In a node there are several [some services](https://kubernetes.io/docs/concepts/overview/components/). Roughly it's shown in the following pictures.
+
 <img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images/ss_kubernetes_service.png" alt="" width="75%"/>
 
-1. Contriner Runtime <br/>
+## Node Components:
+Node components run on every node, maintaining running pods and providing the Kubernetes runtime environment.
+
+1. ***Contriner Runtime*** <br/>
 The container runtime is the software that is responsible for running containers.
-2. Kubelet
-3. Kube-Proxy
+
+2. ***kubelet*** <br/>
+An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.
+
+3. ***kube-proxy*** <br/>
+kube-proxy is a network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept.
+
+## Control Plane Component
+The control plane's components make global decisions about the cluster (for example, scheduling), as well as detecting and responding to cluster events (for example, starting up a new pod when a deployment's replicas field is unsatisfied).
+
+1. ***kube-apiserver*** <br/>
+The API server is a component of the Kubernetes control plane that exposes the Kubernetes API. The API server is the front end for the Kubernetes control plane.
+
+2. ***kube-scheduler***<br/>
+Control plane component that watches for newly created Pods with no assigned node, and selects a node for them to run on
+
+3. ***kube-controller-manager*** <br/>
+Control plane component that runs controller processes.
+
+4. ***cloud-controller-manager*** <br/>
+A Kubernetes control plane component that embeds cloud-specific control logic. The cloud controller manager lets you link your cluster into your cloud provider's API, and separates out the components that interact with that cloud platform from components that only interact with your cluster.
+The cloud-controller-manager only runs controllers that are specific to your cloud provider. If you are running Kubernetes on your own premises, or in a learning environment inside your own PC, the cluster does not have a cloud controller manager.
+
+5. ***etcd*** <br/>
+Consistent and highly-available key value store used as Kubernetes' backing store for all cluster data.

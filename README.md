@@ -47,13 +47,13 @@ Every cluster has at least one worker node. In a node there are several [some se
 Node components run on every node, maintaining running pods and providing the Kubernetes runtime environment.
 
 1. ***Contriner Runtime*** <br/>
-The container runtime is the software that is responsible for running containers.
+The <code>container runtime</code> is the software that is responsible for running containers.
 
 2. ***kubelet*** <br/>
-An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.
+The <code>kubelet</code> is an agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.
 
 3. ***kube-proxy*** <br/>
-kube-proxy is a network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept. It is reponsible for network communication inside on each Node and between Nodes 
+The <code>kube-proxy</code> is a network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept. It is reponsible for network communication inside on each Node and between Nodes 
 
 ## Control Plane Component
 The control plane's components make global decisions about the cluster (for example, scheduling), as well as detecting and responding to cluster events (for example, starting up a new pod when a deployment's replicas field is unsatisfied).
@@ -71,4 +71,4 @@ The <code>kube-controller-manager</code> runs controller processes. It controls 
 The <code>cloud-controller-manager</code> embeds cloud-specific control logic. The cloud controller manager lets you link your cluster into your cloud provider's API. If we are running Kubernetes on our own premises, or in a learning environment inside our own PC, the cluster does not have a cloud controller manager.
 
 5. ***etcd*** <br/>
-Storing all cluster data as key value store.
+The <code>etcd</code> stores all cluster data in key value format.

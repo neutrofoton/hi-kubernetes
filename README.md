@@ -59,17 +59,16 @@ kube-proxy is a network proxy that runs on each node in your cluster, implementi
 The control plane's components make global decisions about the cluster (for example, scheduling), as well as detecting and responding to cluster events (for example, starting up a new pod when a deployment's replicas field is unsatisfied).
 
 1. ***kube-apiserver*** <br/>
-The API server is a component of the Kubernetes control plane that exposes the Kubernetes API. The API server is the front end for the Kubernetes control plane. The API Service is the main communication between different Node.
+The <code>kube-apiserver</code> is a component of the Kubernetes control plane that exposes the Kubernetes API. The API Service is the main communication between different Node.
 
 2. ***kube-scheduler***<br/>
-Control plane component that watches for newly created Pods with no assigned node, and selects a node for them to run on. It is responsible for planning and distribution load in the cluster.
+The <code>kube-scheduler</code> is responsible for planning and distribution load in the cluster. It watches for newly created Pods with no assigned node, and selects a node for them to run on. 
 
 3. ***kube-controller-manager*** <br/>
-Control plane component that runs controller processes. It controls each Node in the Cluster
+The <code>kube-controller-manager</code> runs controller processes. It controls each Node in the Cluster.
 
 4. ***cloud-controller-manager*** <br/>
-A Kubernetes control plane component that embeds cloud-specific control logic. The cloud controller manager lets you link your cluster into your cloud provider's API, and separates out the components that interact with that cloud platform from components that only interact with your cluster.
-The cloud-controller-manager only runs controllers that are specific to your cloud provider. If you are running Kubernetes on your own premises, or in a learning environment inside your own PC, the cluster does not have a cloud controller manager.
+The <code>cloud-controller-manager</code> embeds cloud-specific control logic. The cloud controller manager lets you link your cluster into your cloud provider's API. If we are running Kubernetes on our own premises, or in a learning environment inside our own PC, the cluster does not have a cloud controller manager.
 
 5. ***etcd*** <br/>
 Storing all cluster data as key value store.

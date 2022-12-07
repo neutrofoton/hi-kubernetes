@@ -39,7 +39,7 @@ The Master Node manages the Worker Nodes. It's the Master Node jobs to distribut
 
 <img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images/ss_master_worker_nodes.png" alt="" width="75%"/>
 
-Every cluster has at least one worker node. In a node there are several [some services](https://kubernetes.io/docs/concepts/overview/components/). Roughly it's shown in the following pictures.
+Every cluster has at least one worker node. In a Node there are several [components or services](https://kubernetes.io/docs/concepts/overview/components/). Roughly it's shown in the following pictures.
 
 <img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images/ss_kubernetes_service.png" alt=""/>
 

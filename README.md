@@ -72,3 +72,71 @@ The <code>cloud-controller-manager</code> embeds cloud-specific control logic. T
 
 5. ***etcd*** <br/>
 The <code>etcd</code> stores all cluster data in key value format.
+
+# Installations
+
+## Install kubectl
+Installation <code>kubectl</code> can be found [here](https://kubernetes.io/docs/tasks/tools/)
+
+``` bash
+# install with brew
+brew install kubectl
+
+# check the version
+kubectl version --client
+
+# or the new command check version
+kubectl version --output=json
+```
+## Install minikube
+Installatio step of <code>minikube</code> can be found [here](https://minikube.sigs.k8s.io/docs/start/)
+
+``` bash
+# install with brew
+brew install minikube
+
+# check the installation
+minikube
+```
+
+Starting the <code>minikube</code>
+``` bash
+# starting minikube
+minikube start
+```
+> The version of virtual box I use is VirtualBox-6.1.42 for Macos (intel)
+
+When we successfully starting minikube, checking the version will give us server and client information
+
+``` bash
+kubectl version --output=json
+```
+
+``` json
+{
+  "clientVersion": {
+    "major": "1",
+    "minor": "25",
+    "gitVersion": "v1.25.2",
+    "gitCommit": "5835544ca568b757a8ecae5c153f317e5736700e",
+    "gitTreeState": "clean",
+    "buildDate": "2022-09-21T14:33:49Z",
+    "goVersion": "go1.19.1",
+    "compiler": "gc",
+    "platform": "darwin/amd64"
+  },
+  "kustomizeVersion": "v4.5.7",
+  "serverVersion": {
+    "major": "1",
+    "minor": "26",
+    "gitVersion": "v1.26.1",
+    "gitCommit": "8f94681cd294aa8cfd3407b8191f6c70214973a4",
+    "gitTreeState": "clean",
+    "buildDate": "2023-01-18T15:51:25Z",
+    "goVersion": "go1.19.5",
+    "compiler": "gc",
+    "platform": "linux/amd64"
+  }
+}
+```
+

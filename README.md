@@ -75,8 +75,8 @@ The <code>etcd</code> stores all cluster data in key value format.
 
 # Installations
 
-## Install kubectl
-Installation <code>kubectl</code> can be found [here](https://kubernetes.io/docs/tasks/tools/)
+## Installing kubectl
+Installation steps of <code>kubectl</code> can be found [here](https://kubernetes.io/docs/tasks/tools/)
 
 ``` bash
 # install with brew
@@ -88,15 +88,20 @@ kubectl version --client
 # or the new command check version
 kubectl version --output=json
 ```
-## Install minikube
-Installatio step of <code>minikube</code> can be found [here](https://minikube.sigs.k8s.io/docs/start/)
+## Installing minikube
+Installation steps of <code>minikube</code> can be found [here](https://minikube.sigs.k8s.io/docs/start/)
 
 ``` bash
 # install with brew
 brew install minikube
 
 # check the installation
-minikube
+minikube version
+```
+
+```
+minikube version: v1.29.0
+commit: ddac20b4b34a9c8c857fc602203b6ba2679794d3
 ```
 
 Starting the <code>minikube</code>
@@ -104,7 +109,8 @@ Starting the <code>minikube</code>
 # starting minikube
 minikube start
 ```
-> The version of virtual box I use is VirtualBox-6.1.42 for Macos (intel)
+> 1. Macos Monterey 12.6.3
+> 2. The version of virtual box I use is VirtualBox-6.1.42 for Macos (intel)
 
 When we successfully starting minikube, checking the version will give us server and client information
 

@@ -108,12 +108,19 @@ Starting the <code>minikube</code>
 ``` bash
 # starting minikube
 minikube start
+
+# starting minikube on windows with hyperv
+minikube start --driver=hyperv
+
 ```
 > The environtiment machine I use:
 > 1. Macos Monterey 12.6.3
 > 2. VirtualBox-6.1.42 for Macos (intel)
+> 3. Microsoft Windows 10 Pro
 > 
-> I got an issue when using version 7.0 of virtual box. The issue was <code>["The host-only adapter we just created is not visible"]( https://github.com/kubernetes/minikube/issues/15377)</code>. It is solved by downgrading the VirtualBox version to 6.1.42
+> On Macos, I got an issue when using version 7.0 of virtual box. The issue was <code>["The host-only adapter we just created is not visible"]( https://github.com/kubernetes/minikube/issues/15377)</code>. It is solved by downgrading the VirtualBox version to 6.1.42.
+> 
+>Meanwhile, on Windows 10 Pro no issue I got by using parameter <code>--driver=hyperv</code>. Don't forget to run the terminal as <code>Administrator</code> otherwise it may get permission issue.
 
 
 When we successfully starting minikube, checking the version will give us server and client information

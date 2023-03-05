@@ -109,8 +109,12 @@ Starting the <code>minikube</code>
 # starting minikube
 minikube start
 ```
+> The environtiment machine I use:
 > 1. Macos Monterey 12.6.3
-> 2. The version of virtual box I use is VirtualBox-6.1.42 for Macos (intel)
+> 2. VirtualBox-6.1.42 for Macos (intel)
+> 
+> I got an issue when using version 7.0 of virtual box. The issue was <code>["The host-only adapter we just created is not visible"]( https://github.com/kubernetes/minikube/issues/15377)</code>. It is solved by downgrading the VirtualBox version to 6.1.42
+
 
 When we successfully starting minikube, checking the version will give us server and client information
 

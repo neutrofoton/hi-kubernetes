@@ -88,8 +88,54 @@ Add the Weave Net CNI plugin for highly available cluster
 # download the kube-flannel.yml
 curl https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
 
+```
+> Don't forget change the network IP to 
+> ```
+> "Network": "192.168.0.0/16",
+> ```
+> according the <code>pod-network-cidr</code> parameter in the <code>kubeadm</code> initialization.
+>
+
+Then apply the <code>kube-flannel.yml</code>
+
+``` bash
 # apply the kube-flannel.yml
 kubectl apply -f kube-flannel.yml
 ```
 
 ## 4. Joining the Worker Nodes to The Cluster
+
+On the <code>worker-node-1</code> and <code>worker-node-2</code> run the following command to join to the cluster.
+
+``` bash
+kubeadm join 172.31.53.81:6443 --token zoimxu.lmx5bxxxxx --dicovery-token-ca-cert-hash sha256:485d79d1a78bxxxxxxxxxxxxxxxxxxxx
+```
+
+To checking the nodes whether joined to the cluster
+
+``` bash
+# get all joined nodes in the cluster
+kubectl get nodes
+
+# get the namespaces
+kubectl get namespaces
+
+# get pods with namespace
+kubectl get pods --all-namespaces
+kubectk get pods -A
+```
+
+<img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images-on-premise/kubeadm-check-nodes.png" alt=""/>
+
+> If you got status <code>ContainerCreating</code> for long time, 
+you can conside doing a full reboot of VMs that are running the Kubernetes master node and Kubernetes worker nodes. 
+
+<img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images-on-premise/kubeadm-check-nodes-ok.png" alt=""/>
+
+If further issue still occur with the pods you can check using
+``` bash
+kubectl describe pod <name>
+```
+
+# References
+1. https://stackoverflow.com/questions/48190928/kubernetes-pod-remains-in-containercreating-status

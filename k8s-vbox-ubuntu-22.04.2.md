@@ -341,12 +341,12 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
    ```
 
 # References
-1. https://stackoverflow.com/questions/44114854/virtualbox-cannot-register-the-hard-disk-already-exists
+1. https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
 2. https://kubernetes.io/docs/concepts/cluster-administration/addons/
-3. https://docs.tigera.io/archive/v3.0/getting-started/kubernetes
-4. https://www.vladimircicovic.com/2022/08/kubernetes-setup-on-ubuntu-2204-lts-jammy-jellyfish
-5. https://www.letscloud.io/community/how-to-install-kubernetesk8s-and-docker-on-ubuntu-2004
-6. https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
-7. https://itnext.io/kubernetes-on-ubuntu-on-virtualbox-60e8ce7c85ed
-8. https://stackoverflow.com/questions/70571312/port-6443-connection-refused-when-setting-up-kubernetes
-9. https://computingforgeeks.com/install-kubernetes-cluster-ubuntu-jammy/ (PROPRITY)
+3. https://stackoverflow.com/questions/44114854/virtualbox-cannot-register-the-hard-disk-already-exists
+4. https://computingforgeeks.com/install-kubernetes-cluster-ubuntu-jammy/
+5. https://docs.tigera.io/archive/v3.0/getting-started/kubernetes
+6. https://www.vladimircicovic.com/2022/08/kubernetes-setup-on-ubuntu-2204-lts-jammy-jellyfish
+7. https://www.letscloud.io/community/how-to-install-kubernetesk8s-and-docker-on-ubuntu-2004
+8. https://itnext.io/kubernetes-on-ubuntu-on-virtualbox-60e8ce7c85ed
+9. https://stackoverflow.com/questions/70571312/port-6443-connection-refused-when-setting-up-kubernetes

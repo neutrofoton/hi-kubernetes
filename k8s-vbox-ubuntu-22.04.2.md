@@ -304,16 +304,18 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
    sudo kubeadm config images pull --cri-socket /run/cri-dockerd.sock
    ```
 
+   
+3. Initialize Clustering
+   ``` bash
+   sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --cri-socket /run/cri-dockerd.sock --ignore-preflight-errors=NumCPU
+   ``` 
+   
    > These are the basic kubeadm init options that are used to bootstrap cluster.<br/><br/>
    > <code>--control-plane-endpoint</code> :  set the shared endpoint for all control-plane nodes. Can be DNS/IP <br/>
    > <code>--pod-network-cidr</code> : Used to set a Pod network add-on CIDR<br/>
    > <code>--cri-socket</code> : Use if have more than one container runtime to set runtime socket path<br/>
    > <code>--apiserver-advertise-address</code> : Set advertise address for this particular control-plane node's API server<br/>
    
-3. Initialize Clustering
-   ``` bash
-   sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --cri-socket /run/cri-dockerd.sock --ignore-preflight-errors=NumCPU
-   ``` 
 
    Add Kubernates configuration to 
    ``` bash

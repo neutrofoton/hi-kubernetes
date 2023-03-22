@@ -85,6 +85,7 @@ In the NAT Adapter network configuration, create NAT Network K8sCluster
    sudo -i
    apt-get update && apt-get upgrade -y
    apt-get install -y vim git curl wget apt-transport-https gnupg gnupg2 software-properties-common ca-certificates lsb-release
+   exit
    ```
 
 > Repeat on all the other nodes.
@@ -101,6 +102,7 @@ The Docker installation steps are as follow:
    # https://docs.docker.com/engine/install/ubuntu/
 
    # 1. Add Docker’s official GPG key
+   
    sudo mkdir -m 0755 -p /etc/apt/keyrings
    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
@@ -145,8 +147,10 @@ The Kubernates installation steps are described in the following steps:
 1. Add <code>kubernates</code> repository 
    
    ``` bash
+   sudo -i
    sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add
    sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+   exit
    ```
 2. Install <code>kubeadm, kubelet, kubectl</code>
    ``` bash

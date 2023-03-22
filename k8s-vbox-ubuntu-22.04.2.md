@@ -79,13 +79,12 @@ In the NAT Adapter network configuration, create NAT Network K8sCluster
    exec bash
    ```
 # 2. Tool installation
-   Update, upgrade package and install vim tool.
+   Update the apt package index and install packages that are needed.
 
    ``` bash
    sudo -i
    apt-get update && apt-get upgrade -y
-   apt-get install -y vim git curl wget apt-transport-https
-   gnupg2 software-properties-common ca-certificates
+   apt-get install -y vim git curl wget apt-transport-https gnupg gnupg2 software-properties-common ca-certificates lsb-release
    ```
 
 > Repeat on all the other nodes.
@@ -101,28 +100,23 @@ The Docker installation steps are as follow:
    ``` bash
    # https://docs.docker.com/engine/install/ubuntu/
 
-   # 1. Update the apt package index and install packages to allow apt to use a repository over HTTPS:
-   
-   sudo apt-get update
-   sudo apt-get install ca-certificates curl gnupg lsb-release
-
-   # 2. Add Docker’s official GPG key
+   # 1. Add Docker’s official GPG key
    sudo mkdir -m 0755 -p /etc/apt/keyrings
    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
-   # 3. Set up the repository
+   # 2. Set up the repository
    echo \
    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-   # 4. Update package apt package index
+   # 3. Update package apt package index
    sudo apt-get update
 
    # NOTE: if receiving a GPG error when running apt-get update?
    sudo chmod a+r /etc/apt/keyrings/docker.gpg
    sudo apt-get update
 
-   # 5. Install Docker Engine, containerd, and Docker Compose.
+   # 4. Install Docker Engine, containerd, and Docker Compose.
    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 

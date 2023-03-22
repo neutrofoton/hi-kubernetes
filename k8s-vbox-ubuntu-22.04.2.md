@@ -1,8 +1,8 @@
 # 1. Configuring Virtual Box VMs
 The configuration step of Virtual Box are as follow:
 
-1. Install a VM <code>k8s</code> using Ubuntu Linux 22.04.2 LTS as a VM reference.
-2. Copy disk of the VM as <code>k8s-master.vdi</code>, <code>k8s-worker1.vdi</code>, <code>k8s-worker2.vdi</code>.
+1. Installing a VM <code>k8s</code> using Ubuntu Linux 22.04.2 LTS as a VM reference.
+2. Copying disk of the VM as <code>k8s-master.vdi</code>, <code>k8s-worker1.vdi</code>, <code>k8s-worker2.vdi</code>.
 3. Using Windows Command Prompt, change the hardisk UUID of each hdd on step <code>1.2</code> with the following command
    ```
    cd C:\Program Files\Oracle\VirtualBox
@@ -10,18 +10,18 @@ The configuration step of Virtual Box are as follow:
 
     UUID changed to: 91ebaec7-c113-4bb0-bc12-baa557f0574e
    ```
-4. Do the step <code>1.3</code> for the  <code>k8s-worker1.vdi</code>, <code>k8s-worker2.vdi</code>.
+4. Applying the step <code>1.3</code> for the  <code>k8s-worker1.vdi</code>, <code>k8s-worker2.vdi</code>.
 
-5. Configure Network Adapter.
-<img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images-k8s-vbox/k8s-vbox-network-setup.png" alt=""/>
-<br/><br/>
-Host Only Adapter network configuration
-<img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images-k8s-vbox/k8s-vbox-network-host-only.png" alt=""/>
-<br/><br/>
-In the NAT Adapter network configuration, create NAT Network K8sCluster
-<img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images-k8s-vbox/k8s-vbox-network-nat.png" alt=""/>
+5. Configuring Network Adapter.
+   <img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images-k8s-vbox/k8s-vbox-network-setup.png" alt=""/>
+   <br/><br/>
+   The *Host Only Adapter* network configuration as follow
+   <img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images-k8s-vbox/k8s-vbox-network-host-only.png" alt=""/>
+   <br/><br/>
+   In the *NAT Adapter* network configuration, create a NAT Network named *K8sCluster*
+   <img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images-k8s-vbox/k8s-vbox-network-nat.png" alt=""/>
 
-6. Create three VMs <code>k8s-master</code>, <code>k8s-worker1</code>, <code>k8s-worker2</code> using the existing disks <code>k8s-master.vdi</code>, <code>k8s-worker1.vdi</code>, <code>k8s-worker2.vdi</code>. Makesure the network of NAT, Host Only Adapter, Bridge and NAT Network enabled. 
+6. Creating three VMs <code>k8s-master</code>, <code>k8s-worker1</code>, <code>k8s-worker2</code> using the existing disks namely <code>k8s-master.vdi</code>, <code>k8s-worker1.vdi</code>, <code>k8s-worker2.vdi</code>. Makesure the network of *NAT, Host Only Adapter, Bridge* and *NAT Network* enabled. 
 
    <img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images-k8s-vbox/k8s-vbox-network-enable-adapter-NAT.png" alt=""/>
    <br/><br/>
@@ -37,13 +37,17 @@ In the NAT Adapter network configuration, create NAT Network K8sCluster
    ```
    ip addr
    ```
-   Set the ip of host only adapter to: <br/>
    
+   
+    
+    <sub>*Table 1: Node, IP and Hostname*</sub>
     | Node        | IP Host Only   |Host Name               |
     | :---        |     :---:      |    :---               | 
     | master      | 192.168.56.110 |master.neutro.io        | 
     | worker1     | 192.168.56.111 |worker-node-1.neutro.io |
     | worker2     | 192.168.56.112 |worker-node-2.neutro.io |
+
+   Set the ip of host only adapter of master according Table 1 by editing the <code>/etc/netplan/00-installer-config.yaml</code>
 
    ``` bash
    vi /etc/netplan/00-installer-config.yaml
@@ -64,69 +68,63 @@ In the NAT Adapter network configuration, create NAT Network K8sCluster
           dhcp4: true
       version: 2
    ```
-
+   
+   Set the hostname for master with the following command.
    ``` bash
    # host name for master
    sudo hostnamectl set-hostname master.neutro.io
    exec bash
-   
-   # host name for worker 1
-   sudo hostnamectl set-hostname worker1.neutro.io
-   exec bash
-   
-   # host name for worker 2
-   sudo hostnamectl set-hostname worker2.neutro.io
-   exec bash
    ```
-# 2. Tool installation
-   Update the apt package index and install packages that are needed.
 
-   ``` bash
-   sudo -i
-   apt-get update && apt-get upgrade -y
-   apt-get install -y vim git curl wget apt-transport-https gnupg gnupg2 software-properties-common ca-certificates lsb-release
-   exit
-   ```
+   > Apply the same things to the <code>worker1 node</code> and <code>worker2 node</code> by refering to the Table 1.
+
+# 2. Tool installation
+Updating the apt package index and installing the followingpackages that are needed in Kubernates and container installation.
+
+``` bash
+sudo -i
+apt-get update && apt-get upgrade -y
+apt-get install -y vim git curl wget apt-transport-https gnupggnupg2 software-properties-common ca-certificates lsb-release
+
+exit
+```
 
 > Repeat on all the other nodes.
 
 # 3. Docker Installation
 The Docker installation steps are as follow:
 
-1. Install docker 
-   ``` bash
-   # sudo apt install docker.io 
-   ``` 
+1. Installing Docker 
 
    ``` bash
    # https://docs.docker.com/engine/install/ubuntu/
 
-   # 1. Add Docker’s official GPG key
-   
+   # 1. Adding Docker official GPG key
    sudo mkdir -m 0755 -p /etc/apt/keyrings
    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
-   # 2. Set up the repository
+   # 2. Setting up the repository
    echo \
    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-   # 3. Update package apt package index
+   # 3. Updating package apt package index
    sudo apt-get update
 
    # NOTE: if receiving a GPG error when running apt-get update?
    sudo chmod a+r /etc/apt/keyrings/docker.gpg
    sudo apt-get update
 
-   # 4. Install Docker Engine, containerd, and Docker Compose.
+   # 4. Installing Docker Engine, containerd, and Docker Compose.
    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
-2. Check the docker version
+2. Checking the docker version
    ``` bash
    docker version
    ```
-3. Enable and start docker
+
+3. Enabling and starting docker
    ``` bash
    sudo systemctl enable docker
    # sudo systemctl start docker
@@ -134,44 +132,46 @@ The Docker installation steps are as follow:
    sudo systemctl restart docker
    ```
 
-   Verify the docker status
+   Verifying the docker status
    ``` bash
    sudo systemctl status docker
    ```
 
-> Repeat on all the other nodes.
+   > Repeat on all the other nodes.
 
 # 4. Kubernates Installation
 The Kubernates installation steps are described in the following steps:
 
-1. Add <code>kubernates</code> repository 
+1. Adding <code>kubernates</code> repository 
    
    ``` bash
    sudo -i
    sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add
    sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+   
    exit
    ```
-2. Install <code>kubeadm, kubelet, kubectl</code>
+
+2. Installing <code>kubeadm, kubelet, kubectl</code>
    ``` bash
    sudo apt install -y kubeadm kubelet kubectl
    sudo apt-mark hold kubeadm kubelet kubectl
    ```
 
-   Verify the installation
+   Verifying the installation
    ``` bash
    kubectl version --output=yaml
    kubeadm version
    ```
 
-3. Disable the swap memory
+3. Disabling the swap memory
 
    Turn off swap
    ``` bash
    sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
    ```
 
-   Now disable Linux swap space permanently in <code>/etc/fstab</code>. Search for a swap line and add # (hashtag/comment) sign in front of the line.
+   To ensure we disable Linux swap space permanently, edit the <code>/etc/fstab</code> then remark the <code>swap</code> line by adding # (hashtag/comment) sign in front of the line.
 
    ``` bash
    sudo vim /etc/fstab
@@ -180,7 +180,7 @@ The Kubernates installation steps are described in the following steps:
    #/swap.img	none	swap	sw	0	0
    ```
 
-   Confirm setting is correct.
+   To confirm the setting is correct, run the following command.
    ``` bash
    # swapoff disables swapping on the specified devices and files. 
    # -a flag is given, swapping is disabled on all known swap devices and files (as found in /proc/swaps or /etc/fstab)
@@ -189,7 +189,8 @@ The Kubernates installation steps are described in the following steps:
    sudo mount -a
    free -h
    ```
-4. Enable kernel modules and configure sysctl.
+
+4. Enabling kernel modules and configuring sysctl.
    ``` bash
    # Enable kernel modules
    sudo modprobe overlay
@@ -202,19 +203,18 @@ The Kubernates installation steps are described in the following steps:
    net.bridge.bridge-nf-call-iptables = 1
    net.ipv4.ip_forward = 1
    
-
    # Reload sysctl
    sudo sysctl --system
 
    ```
 
-> Repeat for each server node.
+   > Repeat steps 4.1 - 4.4 on each server node.
 
 # 4. Kubernetes Cluster Configuration
 
 For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The steps are:
 
-1. Configure Container runtime (Docker CE runtime:)
+1. Configuring container runtime (Docker CE runtime)
    ``` bash
    # Create required directories
    sudo mkdir -p /etc/systemd/system/docker.service.d
@@ -237,8 +237,11 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
    sudo systemctl restart docker
    sudo systemctl enable docker
    ```
-2. Install Mirantis cri-dockerd as Docker Engine shim for Kubernetes
-   For Docker Engine you need a shim interface. Mirantis cri-dockerd CRI socket file path is <code>/run/cri-dockerd.sock</code>. This is what will be used when configuring Kubernetes cluster.
+
+2. Installing **Mirantis cri-dockerd** as *Docker Engine shim* for Kubernetes
+
+   For Docker Engine you need a shim interface. The Mirantis cri-dockerd CRI socket file path is <code>/run/cri-dockerd.sock</code>. This is what will be used when configuring Kubernetes cluster.
+
 
    ``` bash
    VER=$(curl -s https://api.github.com/repos/Mirantis/cri-dockerd/releases/latest|grep tag_name | cut -d '"' -f 4|sed 's/v//g')
@@ -260,12 +263,12 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
    sudo mv cri-dockerd/cri-dockerd /usr/local/bin/
    ```
 
-   Validate successful installation
+   To validate the successful installation, check the <code>cri-dockerd</code> version.
    ``` bash
    cri-dockerd --version
    ```
 
-   Configure systemd units for cri-dockerd
+   The next step is configuring systemd units for cri-dockerd
    ``` bash
    wget https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.service
    wget https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.socket
@@ -281,12 +284,12 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
    sudo systemctl enable --now cri-docker.socket
    ```
    
-   Ensure the service is running
+   To ensure the service is running, check the status of <code>cri-docker</code>
    ``` bash
    systemctl status cri-docker.socket
    ```
 
-3. Initialize master node
+3. Initializing master node
 
    In the master node, make sure that the <code>br_netfilter</code> module is loaded:
    ``` bash
@@ -305,19 +308,20 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
    ```
 
    
-3. Initialize Clustering
+4. Initializing Clustering
+
    ``` bash
    sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --cri-socket /run/cri-dockerd.sock --ignore-preflight-errors=NumCPU
    ``` 
    
-   > These are the basic kubeadm init options that are used to bootstrap cluster.<br/><br/>
-   > <code>--control-plane-endpoint</code> :  set the shared endpoint for all control-plane nodes. Can be DNS/IP <br/>
-   > <code>--pod-network-cidr</code> : Used to set a Pod network add-on CIDR<br/>
-   > <code>--cri-socket</code> : Use if have more than one container runtime to set runtime socket path<br/>
-   > <code>--apiserver-advertise-address</code> : Set advertise address for this particular control-plane node's API server<br/>
+    | Node                                          | IP Host Only   |
+    | :---                                         |     :---       |
+    | <code>--control-plane-endpoint</code>        | set the shared endpoint for all control-plane nodes. Can be DNS/IP |
+    | <code>--pod-network-cidr</code>              | set a Pod network add-on CIDR |
+    | <code>--cri-socket</code>                    | use if have more than one container runtime to set runtime socket path |
+    | <code>--apiserver-advertise-address</code>   | set advertise address for this particular control-plane node's API server |
 
-
-   Add Kubernates configuration to 
+   In the log of <code>kubeadm init</code>, we see an instruction to add kube configuration in home directory. 
    ``` bash
    mkdir -p $HOME/.kube
    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -335,21 +339,30 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
    kubectl apply -f kube-flannel.yml
    ```
 
-   Check the cluster status
+   Check the all pods running or not
    ``` bash
    kubectl get pods --all-namespaces
    ```
    
    <img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images-k8s-vbox/k8s-vbox-all-pods-running.png" alt=""/>
 
-   
+   Finally we can check the master node is ready or not using the following command.
+   ``` bash
+   kubectl get nodes -o wide
+   ```
+
 # References
 1. https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
 2. https://kubernetes.io/docs/concepts/cluster-administration/addons/
-3. https://stackoverflow.com/questions/44114854/virtualbox-cannot-register-the-hard-disk-already-exists
-4. https://computingforgeeks.com/install-kubernetes-cluster-ubuntu-jammy/
-5. https://docs.tigera.io/archive/v3.0/getting-started/kubernetes
-6. https://www.vladimircicovic.com/2022/08/kubernetes-setup-on-ubuntu-2204-lts-jammy-jellyfish
-7. https://www.letscloud.io/community/how-to-install-kubernetesk8s-and-docker-on-ubuntu-2004
-8. https://itnext.io/kubernetes-on-ubuntu-on-virtualbox-60e8ce7c85ed
-9. https://stackoverflow.com/questions/70571312/port-6443-connection-refused-when-setting-up-kubernetes
+3. https://docs.tigera.io/archive/v3.0/getting-started/kubernetes
+4. https://stackoverflow.com/questions/44114854/virtualbox-cannot-register-the-hard-disk-already-exists
+5. https://stackoverflow.com/questions/70571312/port-6443-connection-refused-when-setting-up-kubernetes
+6. https://stackoverflow.com/questions/52609257/coredns-in-pending-state-in-kubernetes-cluster
+7. https://computingforgeeks.com/install-kubernetes-cluster-ubuntu-jammy/
+8. https://computingforgeeks.com/deploy-kubernetes-cluster-on-ubuntu-with-kubeadm/
+9. https://computingforgeeks.com/install-mirantis-cri-dockerd-as-docker-engine-shim-for-kubernetes/
+10. https://www.vladimircicovic.com/2022/08/kubernetes-setup-on-ubuntu-2204-lts-jammy-jellyfish
+11. https://www.letscloud.io/community/how-to-install-kubernetesk8s-and-docker-on-ubuntu-2004
+12. https://itnext.io/kubernetes-on-ubuntu-on-virtualbox-60e8ce7c85ed
+13. https://discuss.kubernetes.io/t/standard-k8s-installation-failed-centos7/20676
+

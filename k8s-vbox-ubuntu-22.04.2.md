@@ -160,7 +160,8 @@ The Kubernates installation steps are described in the following steps:
 
    Verify the installation
    ``` bash
-   kubectl version --client && kubeadm version
+   kubectl version --output=yaml
+   kubeadm version
    ```
 
 3. Disable the swap memory

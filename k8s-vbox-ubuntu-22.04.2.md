@@ -315,7 +315,7 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
    > <code>--pod-network-cidr</code> : Used to set a Pod network add-on CIDR<br/>
    > <code>--cri-socket</code> : Use if have more than one container runtime to set runtime socket path<br/>
    > <code>--apiserver-advertise-address</code> : Set advertise address for this particular control-plane node's API server<br/>
-   
+
 
    Add Kubernates configuration to 
    ``` bash
@@ -339,7 +339,10 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
    ``` bash
    kubectl get pods --all-namespaces
    ```
+   
+   <img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images-k8s-vbox/k8s-vbox-all-pods-running.png" alt=""/>
 
+   
 # References
 1. https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
 2. https://kubernetes.io/docs/concepts/cluster-administration/addons/

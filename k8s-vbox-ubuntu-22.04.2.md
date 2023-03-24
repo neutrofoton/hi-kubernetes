@@ -68,6 +68,9 @@ The configuration step of Virtual Box are as follow:
           dhcp4: true
       version: 2
    ```
+   ``` bash
+   sudo netplan apply
+   ```
    
    Set the hostname for master with the following command.
    ``` bash

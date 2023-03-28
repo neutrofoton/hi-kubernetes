@@ -318,7 +318,11 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
 4. Initializing Clustering
 
    ``` bash
-   sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --cri-socket /run/cri-dockerd.sock --ignore-preflight-errors=NumCPU
+   # without specifing control plane IP
+   sudo kubeadm init --cri-socket /run/cri-dockerd.sock --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=NumCPU
+
+   # init with specific ip of control plane IP
+   sudo kubeadm init --cri-socket /run/cri-dockerd.sock --control-plane-endpoint=192.168.56.110 --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=NumCPU
    ``` 
    
     | Node                                          | IP Host Only   |
@@ -372,4 +376,5 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
 11. https://www.letscloud.io/community/how-to-install-kubernetesk8s-and-docker-on-ubuntu-2004
 12. https://itnext.io/kubernetes-on-ubuntu-on-virtualbox-60e8ce7c85ed
 13. https://discuss.kubernetes.io/t/standard-k8s-installation-failed-centos7/20676
+14. https://ystatit.medium.com/deploy-kubernetes-with-specific-public-ip-address-for-control-plane-endpoint-cef1a54b2fbf
 

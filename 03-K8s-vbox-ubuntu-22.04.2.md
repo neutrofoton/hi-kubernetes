@@ -322,15 +322,16 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
    sudo kubeadm init --cri-socket /run/cri-dockerd.sock --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=NumCPU
 
    # init with specific ip of control plane IP
-   sudo kubeadm init --cri-socket /run/cri-dockerd.sock --control-plane-endpoint=192.168.56.110 --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=NumCPU
+   sudo kubeadm init --cri-socket /run/cri-dockerd.sock --control-plane-endpoint=192.168.56.110 --apiserver-advertise-address=192.168.56.110 --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=NumCPU
+
    ``` 
    
     | Node                                          | IP Host Only   |
     | :---                                         |     :---       |
-    | <code>--control-plane-endpoint</code>        | set the shared endpoint for all control-plane nodes. Can be DNS/IP |
-    | <code>--pod-network-cidr</code>              | set a Pod network add-on CIDR |
     | <code>--cri-socket</code>                    | use if have more than one container runtime to set runtime socket path |
+    | <code>--control-plane-endpoint</code>        | set the shared endpoint for all control-plane nodes. Can be DNS/IP |
     | <code>--apiserver-advertise-address</code>   | set advertise address for this particular control-plane node's API server |
+    | <code>--pod-network-cidr</code>              | set a Pod network add-on CIDR |
 
    In the log of <code>kubeadm init</code>, we see an instruction to add kube configuration in home directory. 
    ``` bash
@@ -363,18 +364,18 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
    ```
 
 # References
-1. https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
-2. https://kubernetes.io/docs/concepts/cluster-administration/addons/
-3. https://docs.tigera.io/archive/v3.0/getting-started/kubernetes
-4. https://stackoverflow.com/questions/44114854/virtualbox-cannot-register-the-hard-disk-already-exists
-5. https://stackoverflow.com/questions/70571312/port-6443-connection-refused-when-setting-up-kubernetes
-6. https://stackoverflow.com/questions/52609257/coredns-in-pending-state-in-kubernetes-cluster
-7. https://computingforgeeks.com/install-kubernetes-cluster-ubuntu-jammy/
-8. https://computingforgeeks.com/deploy-kubernetes-cluster-on-ubuntu-with-kubeadm/
-9. https://computingforgeeks.com/install-mirantis-cri-dockerd-as-docker-engine-shim-for-kubernetes/
-10. https://www.vladimircicovic.com/2022/08/kubernetes-setup-on-ubuntu-2204-lts-jammy-jellyfish
-11. https://www.letscloud.io/community/how-to-install-kubernetesk8s-and-docker-on-ubuntu-2004
-12. https://itnext.io/kubernetes-on-ubuntu-on-virtualbox-60e8ce7c85ed
-13. https://discuss.kubernetes.io/t/standard-k8s-installation-failed-centos7/20676
-14. https://ystatit.medium.com/deploy-kubernetes-with-specific-public-ip-address-for-control-plane-endpoint-cef1a54b2fbf
-
+- https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
+- https://kubernetes.io/docs/concepts/cluster-administration/addons/
+- https://docs.tigera.io/archive/v3.0/getting-started/kubernetes
+- https://computingforgeeks.com/install-kubernetes-cluster-ubuntu-jammy/
+- https://computingforgeeks.com/deploy-kubernetes-cluster-on-ubuntu-with-kubeadm/
+- https://computingforgeeks.com/install-mirantis-cri-dockerd-as-docker-engine-shim-for-kubernetes/
+- https://www.vladimircicovic.com/2022/08/kubernetes-setup-on-ubuntu-2204-lts-jammy-jellyfish
+- https://www.letscloud.io/community/how-to-install-kubernetesk8s-and-docker-on-ubuntu-2004
+- https://itnext.io/kubernetes-on-ubuntu-on-virtualbox-60e8ce7c85ed
+- https://discuss.kubernetes.io/t/standard-k8s-installation-failed-centos7/20676
+- https://ystatit.medium.com/deploy-kubernetes-with-specific-public-ip-address-for-control-plane-endpoint-cef1a54b2fbf
+- https://stackoverflow.com/questions/44114854/virtualbox-cannot-register-the-hard-disk-already-exists
+- https://stackoverflow.com/questions/70571312/port-6443-connection-refused-when-setting-up-kubernetes
+- https://stackoverflow.com/questions/52609257/coredns-in-pending-state-in-kubernetes-cluster
+- https://stackoverflow.com/questions/65995056/kubernetes-api-server-bind-address-vs-advertise-address

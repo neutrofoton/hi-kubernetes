@@ -70,6 +70,10 @@ The configuration step of Virtual Box are as follow:
    ```
    ``` bash
    sudo netplan apply
+
+   # check ip
+   #ip addr
+   ip --brief addr show
    ```
    
    Set the hostname for master with the following command.
@@ -87,7 +91,7 @@ Updating the apt package index and installing the followingpackages that are nee
 ``` bash
 sudo -i
 apt-get update && apt-get upgrade -y
-apt-get install -y vim git curl wget apt-transport-https gnupggnupg2 software-properties-common ca-certificates lsb-release
+apt-get install -y vim git curl wget apt-transport-https gnupg gnupg2 software-properties-common ca-certificates lsb-release
 
 exit
 ```
@@ -213,7 +217,7 @@ The Kubernates installation steps are described in the following steps:
 
    > Repeat steps 4.1 - 4.4 on each server node.
 
-# 4. Kubernetes Cluster Configuration
+# 5. Kubernetes Cluster Configuration
 
 For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The steps are:
 

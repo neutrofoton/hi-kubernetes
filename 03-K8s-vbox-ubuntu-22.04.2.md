@@ -317,6 +317,7 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
    
 4. Initializing Clustering
 
+   On master node, run the following command to initialize cluster.
    ``` bash
    # without specifing control plane IP
    sudo kubeadm init --cri-socket /run/cri-dockerd.sock --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=NumCPU
@@ -372,7 +373,7 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
 2. On each worker node, run the following command to join to the cluster
 
    ``` bash
-   kubeadm join 192.168.56.110:6443 --token 4bz2jr.r7a0fhemw4rrx9uz \
+   sudo kubeadm join 192.168.56.110:6443 --token 4bz2jr.r7a0fhemw4rrx9uz \
         --discovery-token-ca-cert-hash sha256:493dd20563876610d54a27f959ca31520c7a6cc4d24529bc03b5202d2d9c29ea \
         --cri-socket unix:///var/run/cri-dockerd.sock
    ```

@@ -313,7 +313,7 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
    # sudo kubeadm config images pull
    sudo kubeadm config images pull --cri-socket /run/cri-dockerd.sock
    ```
-
+   > Repeat steps 5.1 - 5.3 on each server node.
    
 4. Initializing Clustering
 
@@ -362,6 +362,28 @@ For building Kubernetes cluster, in this lab we use <code>kubeadm</code>. The st
    ``` bash
    kubectl get nodes -o wide
    ```
+# 6. Joining Worker Node to The Cluster
+
+1. On the master node, generate joined token to join to the cluster
+   ``` bash
+   sudo kubeadm token create --print-join-command
+   ```
+
+2. On each worker node, run the following command to join to the cluster
+
+   ``` bash
+   kubeadm join 192.168.56.110:6443 --token 4bz2jr.r7a0fhemw4rrx9uz \
+        --discovery-token-ca-cert-hash sha256:493dd20563876610d54a27f959ca31520c7a6cc4d24529bc03b5202d2d9c29ea \
+        --cri-socket unix:///var/run/cri-dockerd.sock
+   ```
+
+   > we can also generate the token 
+
+3. On the master node, check the nodes which join to the cluster
+```
+kubectl get nodes -o wide
+```
+   <img src="https://github.com/neutrofoton/HiKubernetes/blob/main/images-k8s-vbox/k8s-nodes.png" alt=""/>
 
 # References
 - https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/

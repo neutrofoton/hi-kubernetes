@@ -35,19 +35,19 @@ kubectl apply -f service.yaml
 ```
 Once the service created, check the status of serice and get ip of node (in this case we use minikube).
 
-<img src="images/access-app-from-outside.png" alt=""/>
+<img src="images/access-app-from-outside.png" alt="" width="75%"/>
 
 Then open browser:
 http://192.168.59.100:30080
 
-<img src="images/open-app-0.png" alt=""/>
+<img src="images/open-app-0.png" alt="" width="75%"/>
 
 
 # Updating Version of App
 
 Let's assume we want to update app to a new release, from <code>richardchesterwood/k8s-fleetman-webapp-angular:release0</code> to <code>richardchesterwood/k8s-fleetman-webapp-angular:release0-5</code>
 
-In this example we will add additional label called <code>release</code>
+In this example we will add additional label called <code>release</code> and a new Pod named <code>webapp-release-0-5</code> which represent a new release app.
 
 ``` yaml
 apiVersion: v1
@@ -97,8 +97,8 @@ spec:
   type: NodePort
 ```
 
-Once the second Pod <code>webapp-release-0-5</code> up, we can change the <code>release</code> value from <code>"0"</code> to <code>"0-5"</code> in the service. The changes in release in Service will pointing the it to app version 0-5. It is very fast without downtime.
+Once the second Pod <code>webapp-release-0-5</code> up, we can change the <code>release</code> value from <code>"0"</code> to <code>"0-5"</code> in the service. The changes in release in Service will pointing it to app version 0-5. It is very fast without downtime.
 
-<img src="images/service-pod-change-selector.png" alt=""/>
+<img src="images/service-pod-change-selector.png" alt="" width="75%"/>
 
 If we refresh/force reload browser (http://192.168.59.100:30080), it will load the new release of app (version 0-5).

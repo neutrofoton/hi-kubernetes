@@ -3,7 +3,7 @@ a Service is a method for exposing a network application that is running as one 
 
 The Pod has a <code>label</code> which is a key value pair. The Service has a <code>selector</code> which is a key value pair to. The Service pointing to the Pod based on the match the key value pair on the <code>selector</code> and <code>lable</code>.
 
-<img src="images/service-pod.png" alt=""/>
+<img src="images/service-pod.png" alt=""  width="75%"/>
 
 If a Service we create is designed to be access from internal cluster (such as microservice internal communication), we set the type to <code>ClusterIP</code>. On the other hand if we design it to be accessible from outside cluster, set the type to <code>NodePort</code>/.
 
@@ -97,8 +97,19 @@ spec:
   type: NodePort
 ```
 
+Let's apply the <code>pod.yaml</code> and <code>service.yaml</code>
+``` bash
+kubectl apply -f pod.yaml 
+kubectl apply -f service.yaml 
+```
+
 Once the second Pod <code>webapp-release-0-5</code> up, we can change the <code>release</code> value from <code>"0"</code> to <code>"0-5"</code> in the service. The changes in release in Service will pointing it to app version 0-5. It is very fast without downtime.
 
 <img src="images/service-pod-change-selector.png" alt="" width="75%"/>
+
+We can check further in the detail service information
+
+<img src="images/service-info-change-selector.png" alt="" width="75%"/>
+
 
 If we refresh/force reload browser (http://192.168.59.100:30080), it will load the new release of app (version 0-5).

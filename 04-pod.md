@@ -7,6 +7,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: webapp
+  labels:
+    app: webapp # can be any label ex, myapp: webapp
 spec:
   containers:
   - name: webapp
@@ -47,7 +49,11 @@ kubectl logs --tail=[number] -p {POD_NAME}
 ```
 
 # Interacting with Container
-Pod is not designed to be accessed from outside the cluster. But we still able to connect and execute command inside the pod.
+Pod is not visible from outside the cluster. 
+
+<img src="images/pod-not-accessible-from-outside.png" alt="" width="75%"/>
+
+But we still able to connect and execute command inside the pod.
 
 ``` bash
 kubectl exec {POD_NAME} {COMMAND}
@@ -68,6 +74,9 @@ Inside the container we can do
 # for the example
 wget http://localhost:80
 ```
+
+The other port characteristics are having shot lifetime, regularly die, and regularly recreated.
+
 # References
 1. https://kubernetes.io/docs/concepts/workloads/pods/
 2. https://signoz.io/blog/kubectl-logs-tail/

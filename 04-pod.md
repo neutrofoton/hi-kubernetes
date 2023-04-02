@@ -46,6 +46,7 @@ we also check the log
 kubectl logs --tail=[number] -p {POD_NAME}
 ```
 
+# Interacting with Container
 Pod is not designed to be accessed from outside the cluster. But we still able to connect and execute command inside the pod.
 
 ``` bash

@@ -111,5 +111,10 @@ We can check further in the detail service information
 
 <img src="images/service-info-change-selector.png" alt="" width="75%"/>
 
+> ### Tips
+> We can search/list Pod by filtering on the command
+> ``` bash
+> kubectl get pod --show-labels -l release=0-5
+```
 
 If we refresh/force reload browser (http://192.168.59.100:30080), it will load the new release of app (version 0-5).

@@ -5,4 +5,4 @@ A ReplicaSet's purpose is to maintain number of Pod available at any given time.
 
 From the above picture, if the Pod die for any reason, Kubernetes will spring up a new one Pod to ensure the Pod availability.
 
-In short, if want to deploy a Pod in Kubernates cluster, we could wrap it in a ReplicaSet to ensure it availability in the cluster in case the Pod die for any reason.
+In short, if want to deploy a Pod in Kubernates cluster, we could wrap it in a ReplicaSet to ensure its availability in the cluster in case the Pod die for any reason.

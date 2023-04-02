@@ -1,7 +1,7 @@
 # About ReplicaSet
 A ReplicaSet's purpose is to maintain number of Pod available at any given time. It is used to guarantee the availability of a specified number of identical Pods.
 
-<img src="images/replica-set.png" alt="" width="75%"/>
+<img src="images/replica-set.png" alt="" width="30%"/>
 
 From the above picture, if the Pod die for any reason, Kubernetes will spring up a new one Pod to ensure the Pod availability.
 

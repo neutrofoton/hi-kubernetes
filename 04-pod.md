@@ -22,28 +22,36 @@ To create a Pod, run the following command
 kubectl apply -f pod.yaml 
 ```
 
-We can check list of pods by running
+Operating to Pods can be done with the following command 
 ``` bash
+
+# get all pods
 kubectl get pods
-```
 
-> We can also check all resources at once
-> ``` bash
-> kubectl get all
-> ```
+# get the namespaces
+kubectl get namespaces
 
-We can also delete pods
-``` bash
-# the actual pod.yaml on your local working directory will not be deleted
+# get pods with namespace
+kubectl get pods --all-namespaces
+kubectk get pods -A
+
+# We can also check all resources at once
+kubectl get all
+
+# Deleting Pod. The actual pod.yaml on your local working directory will not be deleted
 kubectl delete -f pod.yaml
+
 ```
 
-If we get an error we can check the clue in
+
+If you got status <code>ContainerCreating</code> for long time, you can consider doing a full reboot of VMs that are running the Kubernetes master node and Kubernetes worker nodes. 
+
+If we get an error while creating Pod, we can check the detail with <code>describe</code> command.
 ``` bash
 kubectl describe pod {POD_NAME}
 ```
 
-we also check the log
+we can also check the log
 ``` bash
 kubectl logs --tail=[number] -p {POD_NAME}
 ```

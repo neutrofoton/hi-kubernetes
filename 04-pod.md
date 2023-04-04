@@ -44,7 +44,7 @@ kubectl delete -f pod.yaml
 ```
 
 
-If you got status <code>ContainerCreating</code> for long time, you can consider doing a full reboot of VMs that are running the Kubernetes master node and Kubernetes worker nodes. 
+If we got status <code>ContainerCreating</code> for long time, we can consider doing a full reboot of VMs that are running the Kubernetes master node and Kubernetes worker nodes. 
 
 If we get an error while creating Pod, we can check the detail with <code>describe</code> command.
 ``` bash

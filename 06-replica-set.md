@@ -81,3 +81,10 @@ On the detail checking of replica set shown that the pod recreated when it's del
 kubectl describe replicaset {NAME_REPLICASET}
 kubectl describe rs {NAME_REPLICASET}
 ```
+
+# Deleting Replica Set
+If delete ReplicaSet, the corresponding pods will be deleted as well.
+
+``` bash
+kubectl delete rs {NAME_REPLICA_SET}
+```

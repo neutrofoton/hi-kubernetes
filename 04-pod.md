@@ -41,6 +41,12 @@ kubectl get all
 # Deleting Pod. The actual pod.yaml on your local working directory will not be deleted
 kubectl delete -f pod.yaml
 
+# delete using pod name
+kubectl delete pod {POD_NAME}
+kubectl delete po {POD_NAME}
+
+# delete all pods
+kubectl delete pods --all
 ```
 
 

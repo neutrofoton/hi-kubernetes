@@ -131,3 +131,27 @@ How the Deployment does the elegant way ilustrated in the following picture.
 <img src="images/how-deployment-work.png" alt=""/>
 
 # Managing Rollout
+
+To check the rollout deployment status and history, run the commands.
+
+``` bash
+# model 1
+kubectl rollout status deployment webapp
+
+# model 2
+kubectl rollout status deploy webapp
+
+kubectl rollout history deployment webapp
+```
+
+### Rolling Back
+To rollback deployment we can do with the following command
+
+``` bash
+kubectl rollout undo deploy webapp --to-revision=1
+```
+
+<img src="images/deployment-history-rollback.png" alt=""/>
+
+
+When we open the browser, we will get previous version. The revision number will keep increment as history tracking of Kubernates.

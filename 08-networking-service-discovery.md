@@ -4,7 +4,7 @@ Let's assume we have an app which stores data in MySql database. It is not a goo
 
 In Kubernetes it is also possible to put multiple container in a single Pod. If we do that with the case of app and database, the app access the database as localhost with a specific port exposed by database container.
 
-<img src="images/app-mysql-in-single-pod.png" alt="" width="75%"/>
+<img src="images/app-mysql-in-single-pod.png" alt="" width="50%"/>
 
 Eventhough designing multiple container in a single pod is acceptable and make the network simple, but it is not a good design and it's not recommended. 
 
@@ -18,4 +18,4 @@ In previous section we know that the functionality of Pods are exposed as Servic
 The next time we run the Kubernetes cluster, we may get differennt IP addresses allocated to the services. The solution is the Kubernetes maintains its own private DNS service. The DNS Service basically is a database containing a set of key value pairs. The key is just a label name of Kubernetes service and the values are the IP addresses of those Services. And Kubernetes takes full responsibility in maintaining this DNS system. Kubernetes service which does is called <code>kube-dns</code>
 
 
-<img src="images/kube-dns-lookup.png" alt="" width="75%"/>
+<img src="images/kube-dns-lookup.png" alt="" width="50%"/>

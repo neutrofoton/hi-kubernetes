@@ -5,3 +5,4 @@
 4. [Pod ](04-pod.md)
 5. [Service ](05-service.md)
 6. [ReplicaSet ](06-replica-set.md)
+7. [Networking](08-networking-service-discovery.md)

@@ -62,5 +62,67 @@ kubectl create ns demo
 # run image inside a specific namespace 
 kubectl run busybox -t -i --image busybox --namespace demo
 ```
+
+# Service Discovery
+
+To demonstrate service dicovery, let's create a Pod and Service (mysql.yaml) for a MySQL database. Then we will try to connect to the database from the previuos web app Pod.
+
+``` bash
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  containers:
+   - name: mysql
+     image: mysql:5
+     env:
+      # Use secret in real life
+      - name: MYSQL_ROOT_PASSWORD
+        value: password
+      - name: MYSQL_DATABASE
+        value: fleetman
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: database
+spec:
+  selector:
+    app: mysql
+  ports:
+  - port: 3306
+  type: ClusterIP
+
+```
+
+``` bash
+kubectl apply -f mysql.yaml
+```
+
+How does the web app Pod know how to find the dns Service?. The answer is Kubernetes will automatically do some management of the containers and it automatically configures the DNS system. We can verify it by viewing the file in the <code>/etc/resolve.conf</code>
+
+
+``` bash
+# get into the Pod shell
+kubectl exec -it webapp-666c69fc7f-hk94d sh
+```
+
+<img src="images/service-discovery-database.png" alt="" />
+
+Let try to connect the MySql Pod from the web app Pod. Before doing that, we will install mysql client in the web app Pod.
+
+
+<img src="images/service-discovery-database-connect.png" alt="" />
+
+> The important thing we have established here is that we can find the IP address of a service just by its name. That is called service discovery.
+
 # Reference
-https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+- https://github.com/DickChesterwood/k8s-fleetman
+- https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+- https://stackoverflow.com/questions/61171487/what-is-the-difference-between-namespaces-and-contexts-in-kubernetes
+- https://loft.sh/blog/kubectl-get-context-its-uses-and-how-to-get-started/
+- https://octopus.com/blog/deleting-kubernetes-resources
+- https://stackoverflow.com/questions/55373686/how-to-switch-namespace-in-kubernetes

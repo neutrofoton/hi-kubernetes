@@ -55,10 +55,11 @@ spec:
 kubectl apply -f active-mq.yaml
 ```
 
- <img src="images/active-mq-deploy-svc.png" alt=""/>
+<img src="images/active-mq-deploy-svc.png" alt=""/>
 
 Now open in browser http://192.168.59.104:30010/
 
+<img src="images/active-mq-ui.png" alt=""/>
 
 # References
 1. https://github.com/DickChesterwood/k8s-fleetman/tree/release0-reconstruction-branch

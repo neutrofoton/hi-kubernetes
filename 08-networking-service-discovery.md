@@ -9,7 +9,7 @@ In Kubernetes it is also possible to put multiple container in a single Pod. If 
 Eventhough designing multiple container in a single pod is acceptable and make the network simple, but it is not a good design and it's not recommended. 
 
 
-Having an app and a database in a single Pod would make the Pod much more complicated to manage. If the Pod fails, then we are going to have to find out if it's failed because of the database contaier or the app container. Generally, it just makes things more complicated.
+Having an app and a database in a single Pod would make the Pod much more complicated to manage. If the Pod fails, then we are going to have to find out if it's failed because of the database container or the app container. Generally, it just makes things more complicated.
 
 The recommended thing is the app and database should have seperated containers and also seperated Pods.
 
@@ -25,7 +25,7 @@ Namespace basically is partioning resources in Kubernetes.
 
 <img src="images/namespaces.png" alt="" width="75%"/>
 
-> In Kubernetes, if we don't specify namespace, it will <code>default</code> namespace.
+> In Kubernetes, if we don't specify namespace, it will be <code>default</code> namespace.
 
 To get list of namespace we check with command
 ``` bash

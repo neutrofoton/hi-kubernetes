@@ -2,7 +2,7 @@
 In this lab, we will use example provided by [DickyChesterwood](https://github.com/DickChesterwood/k8s-fleetman/tree/release0-reconstruction-branch). The docker images are available on [Docker Hub](https://hub.docker.com/u/richardchesterwood)
 
 The scenario as shown in this diagram
- <img src="images/microservice-fleetman.png" alt=""/>
+ <img src="images/microservice-fleetman.png" alt="" width="75%"/>
 
 ### Installing Active MQ
 First of all we will create <code>active-mq.yaml</code>
@@ -59,7 +59,7 @@ kubectl apply -f active-mq.yaml
 
 Now open in browser http://192.168.59.104:30010/
 
-<img src="images/active-mq-ui.png" alt=""/>
+<img src="images/active-mq-ui.png" alt="" width="75%"/>
 
 # References
 1. https://github.com/DickChesterwood/k8s-fleetman/tree/release0-reconstruction-branch

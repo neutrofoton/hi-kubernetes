@@ -79,7 +79,7 @@ spec:
    - name: mysql
      image: mysql:5
      env:
-      # Use secret in real life
+      # Use secret in real implementation
       - name: MYSQL_ROOT_PASSWORD
         value: password
       - name: MYSQL_DATABASE

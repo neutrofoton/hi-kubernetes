@@ -4,10 +4,10 @@ In this lab, we will use example provided by [DickyChesterwood](https://github.c
 The scenario as shown in this diagram
  <img src="images/microservice-fleetman.png" alt="" width="75%"/>
 
-### Installing Active MQ
+### Deploying Queue (ActiveMQ)
 First of all we will create <code>active-mq.yaml</code>
 ``` yaml
-# Active MQ Deployment
+# ActiveMQ Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -27,7 +27,7 @@ spec:
         image: richardchesterwood/k8s-fleetman-queue:release1
 
 ---
-# Active MQ Service
+# ActiveMQ Service
 apiVersion: v1
 kind: Service
 metadata:
@@ -60,6 +60,52 @@ kubectl apply -f active-mq.yaml
 Now open in browser http://192.168.59.104:30010/
 
 <img src="images/active-mq-ui.png" alt="" width="75%"/>
+
+### Deploying Position Simulator
+
+In the diagram, the position simulator is not designed to be accessed from outside the cluster. So it should be isolated and no port needed.
+
+``` yaml
+# Position Simulator Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: position-simulator
+spec:
+  selector:
+    matchLabels:
+      app: position-simulator
+  replicas: 1
+  template: # template for the pods
+    metadata:
+      labels:
+        app: position-simulator
+    spec:
+      containers:
+      - name: position-simulator
+        image: richardchesterwood/k8s-fleetman-position-simulator:release1
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: production-microservice
+```
+
+Save the above yaml as <code>position-simulator.yaml</code> and run apply command.
+``` bash
+kubectl apply -f position-simulator.yaml
+```
+
+Once the position simulator running, we should see queue record in the ActiveMQ dashboard.
+
+<img src="images/active-mq-queue.png" alt="" width="75%"/>
+
+# Investigating Kubernates Log
+If we get an error on resource we can chek
+``` bash
+kubectl logs position-simulator-56686f95f8-xx2t8
+
+# follow the log
+kubectl logs -f position-simulator-56686f95f8-xx2t8
+```
 
 # References
 1. https://github.com/DickChesterwood/k8s-fleetman/tree/release0-reconstruction-branch

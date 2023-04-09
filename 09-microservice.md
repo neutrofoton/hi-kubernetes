@@ -242,6 +242,11 @@ spec:
   type: NodePort
 ```
 
+Let's check the API gateway by open http://192.168.59.105:30020/ in browser.
+
+<img src="images/api-gateway-check.png" alt="" width="75%"/>
+
+
 ### 5. Webapp
 ``` yaml
 apiVersion: apps/v1
@@ -285,7 +290,13 @@ spec:
 
   type: NodePort
 ```
+Let's review all microservice deployments before we open the app.
 
+<img src="images/fleet-man-all.png" alt=""/>
+
+Lastly we can open the app in browser http://192.168.59.105:30080/
+
+<img src="images/fleet-man-app.png" alt="" width="75%"/>
 
 # Investigating Kubernates Log
 If we get an error on resource we can chek

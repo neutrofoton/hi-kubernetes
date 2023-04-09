@@ -57,10 +57,11 @@ kubectl apply -f active-mq.yaml
 
 <img src="images/active-mq-deploy-svc.png" alt=""/>
 
-Now open in browser http://192.168.59.104:30010/
+Now open in browser http://192.168.59.105:30010/
 
 <img src="images/active-mq-ui.png" alt="" width="75%"/>
 
+> ActiveMQ default username/password is admin/admin
 
 ### 2. Deploying Position Simulator
 

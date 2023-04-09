@@ -302,13 +302,14 @@ Lastly we can open the app in browser http://192.168.59.105:30080/
 If we get an error on resource we can chek
 ``` bash
 # get pod description including kubernetes message while creating/updating the pod
-kubectl describe pod position-simulator-56686f95f8-xx2t8
+kubectl describe pod position-simulator-56686f95f8-tb6zt
 
-# get the application log
-kubectl logs position-simulator-56686f95f8-xx2t8
+# get the application log (spring log)
+kubectl logs api-gateway-5bf5cfc887-9gtwv
+kubectl logs position-simulator-56686f95f8-tb6zt
 
 # get the application log by following the log
-kubectl logs -f position-simulator-56686f95f8-xx2t8
+kubectl logs -f position-simulator-56686f95f8-tb6zt
 ```
 
 # References

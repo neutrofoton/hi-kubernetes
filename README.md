@@ -7,3 +7,4 @@
 6. [ReplicaSet ](06-replica-set.md)
 7. [Deployment](07-deployment.md)
 8. [Networking](08-networking-service-discovery.md)
+9. [Microservices](09-microservice.md)

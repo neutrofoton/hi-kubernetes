@@ -1,10 +1,11 @@
 # Microservice 
 In this lab, we will use example provided by [DickyChesterwood](https://github.com/DickChesterwood/k8s-fleetman/tree/release0-reconstruction-branch). The docker images are available on [Docker Hub](https://hub.docker.com/u/richardchesterwood)
 
-The scenario as shown in this diagram
- <img src="images/microservice-fleetman.png" alt="" width="75%"/>
+<img src="images/microservice-fleetman.png" alt="" width="75%"/>
+The scenario as shown in the above diagram. The deployment steps are:
+ 
 
-### 1. Deploying Queue (ActiveMQ)
+### 1. Queue (ActiveMQ)
 First of all we will create <code>active-mq.yaml</code>
 ``` yaml
 # ActiveMQ Deployment
@@ -63,44 +64,8 @@ Now open in browser http://192.168.59.105:30010/
 
 > ActiveMQ default username/password is admin/admin
 
-### 2. Deploying Position Simulator
 
-In the diagram, the position simulator is not designed to be accessed from outside the cluster. So it should be isolated and no port needed.
-
-``` yaml
-# Position Simulator Deployment
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: position-simulator
-spec:
-  selector:
-    matchLabels:
-      app: position-simulator
-  replicas: 1
-  template: # template for the pods
-    metadata:
-      labels:
-        app: position-simulator
-    spec:
-      containers:
-      - name: position-simulator
-        image: richardchesterwood/k8s-fleetman-position-simulator:release1
-        env:
-        - name: SPRING_PROFILES_ACTIVE
-          value: production-microservice
-```
-
-Save the above yaml as <code>position-simulator.yaml</code> and run apply command.
-``` bash
-kubectl apply -f position-simulator.yaml
-```
-
-Once the position simulator running, we should see queue record in the ActiveMQ dashboard.
-
-<img src="images/active-mq-queue.png" alt="" width="75%"/>
-
-### 3. Deploying Position Tracker
+### 2. Position Tracker
 
 ``` yaml
 apiVersion: apps/v1
@@ -144,6 +109,10 @@ spec:
   type: NodePort
 
 ```
+
+<img src="images/position-tracker-service.png" alt="" width="75%"/>
+
+When we hit through browser to http://192.168.59.105:30011/ we get 404 which means that the position tracker service (spring boot app) run well.
 
 > For checking purpose we can let the position tracker as <code>NodePort</code>. 
 > In Production phase, we can consider to change the <code>NodePort</code> to <code>ClusterIP</code> since position tracker microservice is not designed to be accessed from ouside cluster. 
@@ -192,8 +161,44 @@ spec:
 
 ```
 
+### 3. Position Simulator
 
-### 4. Deploying API Gateway
+In the diagram, the position simulator is not designed to be accessed from outside the cluster. So it should be isolated and no port needed.
+
+``` yaml
+# Position Simulator Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: position-simulator
+spec:
+  selector:
+    matchLabels:
+      app: position-simulator
+  replicas: 1
+  template: # template for the pods
+    metadata:
+      labels:
+        app: position-simulator
+    spec:
+      containers:
+      - name: position-simulator
+        image: richardchesterwood/k8s-fleetman-position-simulator:release1
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: production-microservice
+```
+
+Save the above yaml as <code>position-simulator.yaml</code> and run apply command.
+``` bash
+kubectl apply -f position-simulator.yaml
+```
+
+Once the position simulator running, we should see queue record in the ActiveMQ dashboard.
+
+<img src="images/active-mq-queue.png" alt="" width="75%"/>
+
+### 4. API Gateway
 ``` yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -237,7 +242,7 @@ spec:
   type: NodePort
 ```
 
-### 5. Deploying Webapp
+### 5. Webapp
 ``` yaml
 apiVersion: apps/v1
 kind: Deployment

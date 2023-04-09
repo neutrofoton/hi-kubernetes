@@ -115,7 +115,7 @@ spec:
 When we hit through browser to http://192.168.59.105:30011/ we get 404 which means that the position tracker service (spring boot app) run well.
 
 > For checking purpose we can let the position tracker as <code>NodePort</code>. 
-> In Production phase, we can consider to change the <code>NodePort</code> to <code>ClusterIP</code> since position tracker microservice is not designed to be accessed from ouside cluster. 
+> For production purpose, we can consider to change the <code>NodePort</code> to <code>ClusterIP</code> since position tracker microservice is not designed to be accessed from ouside cluster. 
 
 ``` yaml
 apiVersion: apps/v1

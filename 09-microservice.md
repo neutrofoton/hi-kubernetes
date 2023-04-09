@@ -4,7 +4,7 @@ In this lab, we will use example provided by [DickyChesterwood](https://github.c
 The scenario as shown in this diagram
  <img src="images/microservice-fleetman.png" alt="" width="75%"/>
 
-### Deploying Queue (ActiveMQ)
+### 1. Deploying Queue (ActiveMQ)
 First of all we will create <code>active-mq.yaml</code>
 ``` yaml
 # ActiveMQ Deployment
@@ -61,7 +61,8 @@ Now open in browser http://192.168.59.104:30010/
 
 <img src="images/active-mq-ui.png" alt="" width="75%"/>
 
-### Deploying Position Simulator
+
+### 2. Deploying Position Simulator
 
 In the diagram, the position simulator is not designed to be accessed from outside the cluster. So it should be isolated and no port needed.
 
@@ -98,7 +99,7 @@ Once the position simulator running, we should see queue record in the ActiveMQ 
 
 <img src="images/active-mq-queue.png" alt="" width="75%"/>
 
-### Deploying Position Tracker
+### 3. Deploying Position Tracker
 
 ``` yaml
 apiVersion: apps/v1
@@ -143,7 +144,8 @@ spec:
 
 ```
 
-Since the position tracker is not designed to exposed to outside cluster, let change the <code>NodePort</code> to <code>ClusterIP</code>
+> For checking purpose we can let the position tracker as <code>NodePort</code>. 
+> In Production phase, we can consider to change the <code>NodePort</code> to <code>ClusterIP</code> since position tracker microservice is not designed to be accessed from ouside cluster. 
 
 ``` yaml
 apiVersion: apps/v1
@@ -189,7 +191,8 @@ spec:
 
 ```
 
-### Deploying API Gateway
+
+### 4. Deploying API Gateway
 ``` yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -233,7 +236,7 @@ spec:
   type: NodePort
 ```
 
-### 9. Deploying Webapp
+### 5. Deploying Webapp
 ``` yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -276,6 +279,8 @@ spec:
 
   type: NodePort
 ```
+
+
 # Investigating Kubernates Log
 If we get an error on resource we can chek
 ``` bash

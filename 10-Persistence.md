@@ -65,3 +65,57 @@ Before demonstrating the persistence with MongoDB, we will update several images
 | Position Simulator     | richardchesterwood/k8s-fleetman-position-simulator:release2 |
 | API Gateway           | richardchesterwood/k8s-fleetman-api-gateway:release2 |
 | WebApp            | richardchesterwood/k8s-fleetman-webapp-angular:release2 |'
+
+# Storing Data of Mongo  (Host)
+
+``` yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  selector:
+    matchLabels:
+      app: mongodb
+  replicas: 1
+  template: # template for the pods
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:3.6.5-jessie
+        volumeMounts:
+          - name: mongo-persistent-storage
+            mountPath: /data/db # MongoDB store data inside the container
+      volumes:
+        - name: mongo-persistent-storage
+          hostPath:
+             path: /mnt/fleetman/mongodb
+             type: DirectoryOrCreate
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: fleetman-mongodb
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - name: mongoport
+      port: 27017
+  type: ClusterIP
+
+```
+
+Open VirtualBox, the double clik minikube VM which is currently running. It will pop up a windows and prompt login to minikube.
+We can login to the minikube host using 
+```
+username : docker
+password : tcuser
+```
+
+<img src="images/minikube-vm-login.png" alt="" width="50%"/>
+
+<img src="images/minikube-vm-data-storage.png" alt="" width="50%"/>

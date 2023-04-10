@@ -54,7 +54,7 @@ fleetman.position.queue=positionQueue
 spring.data.mongodb.host=fleetman-mongodb.default.svc.cluster.local
 ```
 
-Before demonstrating the persistence with MongoDB, we will update several images used in previous section.
+Before demonstrating the persistence with MongoDB, we will update several images used in previous section and apply them in Kubernetes cluster.
 
 <sub>*List of updated pod image*</sub>
 

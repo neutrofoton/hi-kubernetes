@@ -66,7 +66,7 @@ Before demonstrating the persistence with MongoDB, we will update several images
 | API Gateway           | richardchesterwood/k8s-fleetman-api-gateway:release2 |
 | WebApp            | richardchesterwood/k8s-fleetman-webapp-angular:release2 |'
 
-# Storing Data of Mongo  (Host)
+# Storing MongoDB Database Outside Container (Host)
 
 ``` yaml
 apiVersion: apps/v1

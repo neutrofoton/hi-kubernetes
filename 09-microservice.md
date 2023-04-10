@@ -154,7 +154,7 @@ spec:
   ports:
     - name: http
       port: 8080
-      #nodePort: 30020
+      #nodePort: 30011
 
   #type: NodePort
   type: ClusterIP

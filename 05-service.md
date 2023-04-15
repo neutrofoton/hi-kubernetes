@@ -143,7 +143,6 @@ spec:
     app: MyApp
   ports:
       # From inside the cluster, if you hit the my-service:8089 the traffic is routed to 8080 of the container(targetPort)
-
       # From outside the cluster, if you hit host_ip:30475 the traffic is routed to 8080 of the container(targetPort)
     - name: http
       protocol: TCP
@@ -158,7 +157,6 @@ spec:
       nodePort: 31261
      
      # From inside the cluster, if you hit my-service:8443 then it is redirected to 8085 of the container(targetPort)
-
      # From outside the cluster, if you hit host_ip:30013 then it is redirected to 8085 of the container(targetPort)
     - name: health
       protocol: TCP

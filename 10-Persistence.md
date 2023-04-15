@@ -133,7 +133,7 @@ password : tcuser
 
 <img src="images/minikube-vm-data-storage.png" alt="" width="50%"/>
 
-### PersistentVolumeClaim, StorageClass and Binding
+### PersistentVolume
 To make persistent configuration of Pod more clean, we can separated the volume persistent configuration outside the Pod configuration. The Pod just refers to the peristent volume configuration. Our pod yaml does not have to be changed when we move from one cloud provider to another. We just change the persistent config which is referenced by the Pod. Ideally it cound be in separated yaml file. 
 
 A PersistentVolume (PV) is a piece of storage in the cluster that has been provisioned by an administrator or dynamically provisioned using Storage Classes. It is a resource in the cluster just like a node is a cluster resource. PVs are volume plugins like Volumes, but have a lifecycle independent of any individual Pod that uses the PV. This API object captures the details of the implementation of the storage, be that NFS, iSCSI, or a cloud-provider-specific storage system.
@@ -214,6 +214,21 @@ spec:
     type: DirectoryOrCreate
 
 ```
+
+The above yaml shows that to link PersistentVolumeClaim to PersistentVolume is used StorageClassName.
+
+The general linkage are as follow:
+<code>Pod -> PersistentVolumeClaim -> PeristentVolume</code>
+
+```
+# apply PersistentVolume
+kubectl apply -f storage.yaml
+
+# get PersistentVolume
+kubectl get pv
+```
+
+<img src="images/persistent-volume.png" alt=""/>
 
 # References
 1. https://kubernetes.io/docs/concepts/storage/

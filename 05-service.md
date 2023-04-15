@@ -123,11 +123,14 @@ If we refresh/force reload browser (http://192.168.59.100:30080), it will load t
 # Service Port, TargetPort, and NodePort
 There are several different port configurations for Kubernetes services:
 
-- **Port** exposes the Kubernetes service on the specified port within the cluster. Other pods within the cluster can communicate with this server on the specified port.
+- **Port** 
+<br/>The port of this service
 
-- **TargetPort** is the port on which the service will send requests to, that your pod will be listening on. Your application in the container will need to be listening on this port also.
+- **TargetPort** 
+<br/>The target port on the pod(s) to forward traffic to
 
-- **NodePort** exposes a service externally to the cluster by means of the target nodes IP address and the NodePort. NodePort is the default setting if the port field is not specified.
+- **NodePort** 
+<br/>The port on the node where external traffic will come in on.
 
 
 Beside may have the 3 kind of ports, Kubernates service may have multiple port as well. Here is an example of service which has multiple port.

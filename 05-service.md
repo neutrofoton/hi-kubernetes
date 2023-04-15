@@ -115,6 +115,54 @@ We can check further in the detail service information
 > We can search/list Pod by filtering on the command
 > ``` bash
 > kubectl get pod --show-labels -l release=0-5
-```
+> ```
 
 If we refresh/force reload browser (http://192.168.59.100:30080), it will load the new release of app (version 0-5).
+
+
+# Service Port, TargetPort, and NodePort
+There are several different port configurations for Kubernetes services:
+
+- **Port** exposes the Kubernetes service on the specified port within the cluster. Other pods within the cluster can communicate with this server on the specified port.
+
+- **TargetPort** is the port on which the service will send requests to, that your pod will be listening on. Your application in the container will need to be listening on this port also.
+
+- **NodePort** exposes a service externally to the cluster by means of the target nodes IP address and the NodePort. NodePort is the default setting if the port field is not specified.
+
+
+Beside may have the 3 kind of ports, Kubernates service may have multiple port as well. Here is an example of service which has multiple port.
+
+``` yaml
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: MyApp
+  ports:
+      # From inside the cluster, if you hit the my-service:8089 the traffic is routed to 8080 of the container(targetPort)
+
+      # From outside the cluster, if you hit host_ip:30475 the traffic is routed to 8080 of the container(targetPort)
+    - name: http
+      protocol: TCP
+      targetPort: 8080
+      port: 8089
+      nodePort: 30475
+
+    - name: metrics
+      protocol: TCP
+      targetPort: 5555
+      port: 5555
+      nodePort: 31261
+     
+     # From inside the cluster, if you hit my-service:8443 then it is redirected to 8085 of the container(targetPort)
+
+     # From outside the cluster, if you hit host_ip:30013 then it is redirected to 8085 of the container(targetPort)
+    - name: health
+      protocol: TCP
+      targetPort: 8085
+      port: 8443 
+      nodePort: 30013
+```

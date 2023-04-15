@@ -8,3 +8,4 @@
 7. [Deployment](07-deployment.md)
 8. [Networking](08-networking-service-discovery.md)
 9. [Microservices](09-microservice.md)
+10. [Persistence](10-Persistence.md)

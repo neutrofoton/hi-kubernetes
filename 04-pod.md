@@ -47,6 +47,9 @@ kubectl delete po {POD_NAME}
 
 # delete all pods
 kubectl delete pods --all
+
+# delete all pods in specfific namespace
+kubectl delete pods --all --namespace {NAMESPACE_NAME}
 ```
 
 

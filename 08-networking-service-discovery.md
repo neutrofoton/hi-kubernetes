@@ -112,9 +112,7 @@ kubectl exec -it webapp-666c69fc7f-hk94d sh
 
 <img src="images/service-discovery-database.png" alt="" />
 
-From the above screenshot we can see that the corresponding DNS entry for the database is <code>database.default.svc.cluster.local</code>.
-
-In short the general format of fully qualified domain name of service is <code>\<service-name\>.\<namespace-name\>.svc.cluster.local</code>
+From the above screenshot we can see that the corresponding DNS entry for the database is <code>database.default.svc.cluster.local</code>. In short the general format of fully qualified domain name of service is <code>\<service-name\>.\<namespace-name\>.svc.cluster.local</code>
 
 Let try to connect the MySql Pod from the web app Pod. Before doing that, we will install mysql client in the web app Pod.
 

@@ -65,7 +65,7 @@ kubectl run busybox -t -i --image busybox --namespace demo
 
 # Service Discovery
 
-To demonstrate service dicovery, let's create a Pod and Service (mysql.yaml) for a MySQL database. Then we will try to connect to the database from the previuos web app Pod.
+To demonstrate service dicovery, let's create a Pod and Service (mysql.yaml) for a MySQL database. Then we will try to connect to the database from the previous web app Pod.
 
 ``` bash
 apiVersion: v1

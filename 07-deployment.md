@@ -155,3 +155,10 @@ kubectl rollout undo deploy webapp --to-revision=1
 
 
 When we open the browser, we will get previous version. The revision number will keep increment as history tracking of Kubernates.
+
+> Tips
+> Applying annotation in deployment will fill out the column CHANGE-CAUSE which can inform us the reason on each deployment. Please see [here](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+
+# References:
+- https://github.com/DickChesterwood/k8s-fleetman
+- https://kubernetes.io/docs/concepts/workloads/controllers/deployment/

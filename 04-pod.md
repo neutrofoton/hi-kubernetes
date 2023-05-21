@@ -33,7 +33,7 @@ kubectl get namespaces
 
 # get pods with namespace
 kubectl get pods --all-namespaces
-kubectk get pods -A
+kubectl get pods -A
 
 # We can also check all resources at once
 kubectl get all
@@ -74,7 +74,7 @@ But we still able to connect and execute command inside the pod.
 
 ``` bash
 kubectl exec {POD_NAME} {COMMAND}
-kubectl exe webapp ls
+kubectl exec webapp ls
 ```
 
 We could also get a shell interraction inside the container in the pod.

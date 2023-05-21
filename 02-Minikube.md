@@ -82,7 +82,7 @@ kubectl version --output=json
 }
 ```
 
-If we want to access app deployed in the minikube cluster, we use the IP of minikube which can be check using:
+If we want to access app deployed in the minikube cluster, we use the IP of minikube which can be checked using:
 ``` bash
 minikube ip
 ```

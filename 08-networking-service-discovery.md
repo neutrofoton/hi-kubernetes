@@ -102,7 +102,7 @@ spec:
 kubectl apply -f mysql.yaml
 ```
 
-How does the web app Pod know how to find the dns Service?. The answer is Kubernetes will automatically do some management of the containers and it automatically configures the DNS system. We can verify it by viewing the file in the <code>/etc/resolve.conf</code>
+How does the web app Pod know how to find the dns Service? The answer is Kubernetes will automatically do some management of the containers and it automatically configures the DNS system. We can verify it by viewing the file in the <code>/etc/resolve.conf</code>
 
 
 ``` bash

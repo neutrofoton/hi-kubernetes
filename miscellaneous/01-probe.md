@@ -82,6 +82,66 @@ spec:
 ``` yaml
 ```
 
+### Other Example Demonstrating Application Health
+``` yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld-deployment-with-probe
+spec:
+  selector:
+    matchLabels:
+      app: helloworld
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app:  helloworld
+    spec:
+      # initContainers:
+        # Init containers are exactly like regular containers, except:
+          # - Init containers always run to completion.
+          # - Each init container must complete successfully before the next one starts.
+      containers:
+      - name:  helloworld
+        image:  karthequian/helloworld:latest
+        ports:
+        - containerPort:  80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        livenessProbe:
+          # length of time to wait for a pod to initialize
+          # after pod startup, before applying health checking
+          initialDelaySeconds: 10
+          # Amount of time to wait before timing out
+          timeoutSeconds: 1
+          # Probe for http
+          httpGet:
+            # Path to probe
+            path: /
+            # Port to probe
+            port: 80 # change to other than 80 to demontrate bad liveness
+        readinessProbe:
+          # length of time to wait for a pod to initialize
+          # after pod startup, before applying health checking
+          initialDelaySeconds: 10
+          # Amount of time to wait before timing out
+          timeoutSeconds: 1
+          # Probe for http
+          httpGet:
+            # Path to probe
+            path: /
+            # Port to probe
+            port: 80 # change to other than 80 to demontrate bad readiness
+```
+
+To demonstrate the bad liveness and readiness probe, we just need to change the port on readines and liveness probe different from applicatio port (other than 80).
+
 # References
 - https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 - https://medium.com/devops-mojo/kubernetes-probes-liveness-readiness-startup-overview-introduction-to-probes-types-configure-health-checks-206ff7c24487
